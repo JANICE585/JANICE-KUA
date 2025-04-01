@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Y5 BMP APR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=KaiTi&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comic+Sans+MS&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-theme: #E3F2FD;
+  --pink-theme: #FCE4EC;
+  --purple-theme: #F3E5F5;
+  --green-theme: #E8F5E9;
+}
+body {
+  font-family: 'KaiTi', serif;
+  background-color: #f7fafc;
+  margin: 0;
+  padding: 0;
+}
+.flashcard-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  padding: 10px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  .flashcard-container {
+    grid-template-columns: 1fr;
+    padding: 5px;
+  }
+}
+.card-group {
+  padding: 15px;
+  border-radius: 12px;
+  display: none;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.group-1 { background-color: var(--blue-theme); }
+.group-2 { background-color: var(--pink-theme); }
+.group-3 { background-color: var(--purple-theme); }
+.group-4 { background-color: var(--green-theme); }
+.card {
+  width: 100%;
+  height: 150px;
+  margin: 10px auto;
+  perspective: 1000px;
+  cursor: pointer;
+}
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: white;
+}
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: white;
+  font-size: 20px;
+  word-wrap: break-word;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.card-front {
+  font-family: 'KaiTi', serif;
+  color: #333;
+}
+.card-back {
+  transform: rotateY(180deg);
+  font-family: 'Comic Sans MS', cursive;
+  color: #333;
+}
+.group-title {
+  font-weight: bold;
+  padding: 8px 0;
+  margin-bottom: 10px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  font-size: 28px;
+  font-family: 'KaiTi', serif;
+  text-align: center;
+}
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 15px 0;
+  padding: 0 10px;
+}
+.button-container button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Comic Sans MS', cursive;
+  transition: opacity 0.3s ease;
+  flex-grow: 1;
+  max-width: 120px;
+}
+.button-container button.group-1-btn {
+  background-color: var(--blue-theme);
+}
+.button-container button.group-2-btn {
+  background-color: var(--pink-theme);
+}
+.button-container button.group-3-btn {
+  background-color: var(--purple-theme);
+}
+.button-container button.group-4-btn {
+  background-color: var(--green-theme);
+}
+.button-container button:hover {
+  opacity: 0.8;
+}
+.instruction {
+  text-align: center;
+  margin: 10px 0;
+  color: #666;
+  font-size: 18px;
+  font-family: 'KaiTi', serif;
+  padding: 0 10px;
+}
+.header {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  text-align: center;
+}
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Y5 BMP APR</h1>
+  <p class="instruction">点击卡片翻转并查看马来文翻译 Click the card to flip and see Malay translation.</p>
+</div>
+<div class="button-container">
+  <button class="group-1-btn" onclick="toggleGroup('group-1')">8-14/5</button>
+  <button class="group-2-btn" onclick="toggleGroup('group-2')">15-21/5</button>
+  <button class="group-3-btn" onclick="toggleGroup('group-3')">22-28/5</button>
+  <button class="group-4-btn" onclick="toggleGroup('group-4')">1-7/6</button>
+</div>
+<div class="flashcard-container">
+  <!-- 8-14/5 -->
+  <section id="group-1" class="card-group group-1">
+    <h2 class="group-title">8-14/5</h2>
+    <div class="card"><div class="card-inner"><div class="card-front">飞机</div><div class="card-back">Kapal terbang</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">文具</div><div class="card-back">alat tulis</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">校长</div><div class="card-back">Guru besar</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">手表</div><div class="card-back">jam tangan</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">谢谢</div><div class="card-back">Terima kasih</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">图表</div><div class="card-back">Gambar rajah</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">公路</div><div class="card-back">jalan raya</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">中午</div><div class="card-back">Tengah hari</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">粉红色</div><div class="card-back">merah muda</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">首相</div><div class="card-back">Perdana menteri</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">运动衣</div><div class="card-back">Baju sukan</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">向日葵</div><div class="card-back">bunga matahari</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">红辣椒</div><div class="card-back">Cili merah</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">火车</div><div class="card-back">Kereta api</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">红绿灯</div><div class="card-back">Lampu isyarat</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">懒惰</div><div class="card-back">Berat tulang</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">队(计算队伍/人或东西)</div><div class="card-back">Angkatan</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">排,列</div><div class="card-back">Baris</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">条,根,棵,把,...(计算长的东西)</div><div class="card-back">Batang</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">枚(计算细小之环状物)</div><div class="card-back">bentuk</div></div></div>
+  </section>
+
+  <!-- 15-21/5 -->
+  <section id="group-2" class="card-group group-2">
+    <h2 class="group-title">15-21/5</h2>
+    <div class="card"><div class="card-inner"><div class="card-front">笔记本电脑</div><div class="card-back">Komputer riba</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">手机</div><div class="card-back">Telefon bimbit</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">手帕</div><div class="card-back">Sapu tangan</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">菜盖</div><div class="card-back">Tudung saji</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">文具</div><div class="card-back">alat tulis</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">偏心</div><div class="card-back">Pilih kasih</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">手信</div><div class="card-back">Buah tangan</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">爱人</div><div class="card-back">buah hati</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">赤脚</div><div class="card-back">kaki ayam</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">插手</div><div class="card-back">Campur tangan</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">好心</div><div class="card-back">Baik hati</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">独生子女</div><div class="card-back">anak Tunggal</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">贿赂</div><div class="card-back">duit kopi</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">不会踢球的人</div><div class="card-back">kaki bangku</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">国际</div><div class="card-back">Antarabangsa</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">土著</div><div class="card-back">Bumiputera</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">束</div><div class="card-back">berkas</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">片(计算土地或大片之物)</div><div class="card-back">bidang</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">粒(计算粒状物)</div><div class="card-back">biji</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">把(计算锋利的东西)</div><div class="card-back">bilah</div></div></div>
+  </section>
+
+  <!-- 22-28/5 -->
+  <section id="group-3" class="card-group group-3">
+    <h2 class="group-title">22-28/5</h2>
+    <div class="card"><div class="card-inner"><div class="card-front">国民</div><div class="card-back">Warganegara</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">田径</div><div class="card-back">Olahraga</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">自愿</div><div class="card-back">Sukarela</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">合作</div><div class="card-back">Kerjasama</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">告诉</div><div class="card-back">Beritahu</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">太阳</div><div class="card-back">Matahari</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">签名</div><div class="card-back">Tandatangan</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">责任</div><div class="card-back">Tanggungjawab</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">工作人员</div><div class="card-back">Kakitangan</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">委员会</div><div class="card-back">Suruhanjaya</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">旅游</div><div class="card-back">Makan angin</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">个,间,台 (计算大且没有固定形状之物)</div><div class="card-back">buah</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">块 (计算块状之物)</div><div class="card-back">buku</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">粒(计算细小之粒状物)</div><div class="card-back">Butir</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">计算碎片物</div><div class="card-back">carik/cebis</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">一小撮,一小把</div><div class="card-back">cubit</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">串(被连成串的东西)</div><div class="card-back">cucuk</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">响(计算爆炸声或枪声)</div><div class="card-back">das</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">排列(用于成排的东西)</div><div class="card-back">Deret</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">只(用于动物或昆虫)</div><div class="card-back">Ekor</div></div></div>
+  </section>
+
+  <!-- 1-7/6 -->
+  <section id="group-4" class="card-group group-4">
+    <h2 class="group-title">1-7/6</h2>
+    <div class="card"><div class="card-inner"><div class="card-front">委员会</div><div class="card-back">Jawatankuasa</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">秘书</div><div class="card-back">Setiausaha</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">委员,专员</div><div class="card-back">Pesuruhjaya</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">练习簿</div><div class="card-back">Buku latihan</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">警察局</div><div class="card-back">Balai polis</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">三角形</div><div class="card-back">Segi tiga</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">科目</div><div class="card-back">Mata pelajaran</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">正方形</div><div class="card-back">Segi empat</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">试管</div><div class="card-back">Tabung uji</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">形状</div><div class="card-back">Reka bentuk</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">勤劳</div><div class="card-back">Ringan tulang</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">束 扎</div><div class="card-back">gemal</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">计算用拳头握着的东西</div><div class="card-back">Genggam</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">群(坏人物)</div><div class="card-back">Gerombolan</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">束</div><div class="card-back">gugus</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">卷</div><div class="card-back">gulung</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">团,小块</div><div class="card-back">gumpal</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">件,片,张(计算薄面或细的东西)</div><div class="card-back">Helai</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">计算准备好的款代物</div><div class="card-back">Hidang</div></div></div>
+    <div class="card"><div class="card-inner"><div class="card-front">计算小片的东西</div><div class="card-back">hiris/iris</div></div></div>
+  </section>
+</div>
+<script>
+// 显示第一组默认
+window.onload = function() {
+  document.getElementById('group-1').style.display = 'block';
+};
+
+// 切换卡片组显示
+function toggleGroup(groupId) {
+  // 隐藏所有组
+  document.querySelectorAll('.card-group').forEach(group => {
+    group.style.display = 'none';
+  });
+  // 显示选中的组
+  const group = document.getElementById(groupId);
+  group.style.display = 'block';
+  
+  // 收起所有翻转的卡片
+  document.querySelectorAll('.card').forEach(card => {
+    card.classList.remove('flipped');
+  });
+}
+
+// 卡片交互功能
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', function() {
+    this.classList.toggle('flipped');
+  });
+});
+</script>
+</body>
+</html>
